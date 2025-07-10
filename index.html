@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap&subset=latin-ext" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RaceWeave - Profesjonalne części z włókna węglowego</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+	html {
+	  -webkit-font-smoothing: antialiased;
+	  -moz-osx-font-smoothing: grayscale;
+	}
+	body {
+  font-family: 'Inter', 'Segoe UI', 'Arial', 'Helvetica', sans-serif;
+  font-feature-settings: "liga", "dlig";
+}
+        .carbon-fiber-pattern-1 {
+            background-image: 
+                radial-gradient(circle at 25% 25%, #000000 1px, transparent 1px),
+                radial-gradient(circle at 75% 75%, #000000 1px, transparent 1px),
+                linear-gradient(45deg, transparent 30%, rgba(0,0,0,0.02) 30%, rgba(0,0,0,0.02) 70%, transparent 70%);
+            background-size: 20px 20px, 20px 20px, 40px 40px;
+        }
+        
+        .carbon-fiber-pattern-2 {
+            background-image: 
+                linear-gradient(30deg, transparent 40%, rgba(0,0,0,0.03) 40%, rgba(0,0,0,0.03) 60%, transparent 60%),
+                linear-gradient(-30deg, transparent 40%, rgba(0,0,0,0.03) 40%, rgba(0,0,0,0.03) 60%, transparent 60%);
+            background-size: 15px 15px;
+        }
+        
+        .carbon-fiber-pattern-3 {
+            background-image: 
+                repeating-linear-gradient(90deg, transparent, transparent 8px, rgba(0,0,0,0.02) 8px, rgba(0,0,0,0.02) 16px),
+                repeating-linear-gradient(0deg, transparent, transparent 8px, rgba(0,0,0,0.02) 8px, rgba(0,0,0,0.02) 16px);
+        }
+        
+        .carbon-weave {
+            background-image: 
+                linear-gradient(45deg, #000000 25%, transparent 25%, transparent 75%, #000000 75%),
+                linear-gradient(-45deg, #000000 25%, transparent 25%, transparent 75%, #000000 75%);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            opacity: 0.03;
+        }
+        
+        .fiber-texture {
+            background-image: 
+                radial-gradient(ellipse at top left, rgba(0,0,0,0.02) 0%, transparent 50%),
+                radial-gradient(ellipse at top right, rgba(0,0,0,0.02) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom left, rgba(0,0,0,0.02) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom right, rgba(0,0,0,0.02) 0%, transparent 50%);
+            background-size: 25px 25px;
+        }
+		h1, h2, h3, .no-cut {
+  line-height: 1.15 !important;
+  padding-bottom: 6px !important;
+  margin-bottom: 0.1em !important;
+  overflow: visible !important;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(40px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+.animate-fadeIn { animation: fadeIn 1s cubic-bezier(.4,0,.2,1) both; }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-50 text-gray-900">
+    
+    <!-- Newsletter Popup -->
+    <div id="newsletter-popup" class="fixed top-4 right-4 z-50 hidden">
+        <div class="bg-white border-2 border-red-600 rounded-xl p-6 shadow-2xl max-w-sm">
+            <button onclick="closeNewsletter()" class="absolute top-2 right-2 text-gray-400 hover:text-gray-600 text-xl font-bold">&times;</button>
+            <h3 class="text-lg font-bold mb-2 text-red-600">Newsletter RaceWeave</h3>
+            <p class="text-gray-600 mb-4 text-sm">Bądź na bieżąco z nowościami!</p>
+            <input id="newsletter-email" type="email" placeholder="Twój email" class="w-full border border-gray-300 rounded px-3 py-2 mb-3 text-sm">
+<button class="w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded font-semibold text-sm"
+        onclick="subscribeNewsletter()">Zapisz się</button>
+        </div>
+    </div>
+
+    <!-- Cookie Consent -->
+    <div id="cookie-consent" class="fixed bottom-4 left-4 right-4 bg-white border-2 border-red-600 rounded-xl p-4 shadow-2xl z-40 max-w-md mx-auto">
+        <p class="text-sm text-gray-600 mb-3">Ta strona używa plików cookie aby zapewnić najlepsze doświadczenia.</p>
+        <div class="flex gap-2">
+            <button onclick="acceptCookies()" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded text-sm font-semibold">Akceptuj</button>
+            <button onclick="closeCookies()" class="border border-red-600 text-red-600 hover:bg-red-50 px-4 py-2 rounded text-sm">Zamknij</button>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/95 backdrop-blur-md z-40 border-b border-gray-200 shadow-sm">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center py-4">
+      <!-- LOGO I NAZWA — PRZY LEWEJ KRAWĘDZI -->
+      <div class="flex items-center space-x-2">
+  <a href="index.html" class="flex items-center space-x-2 cursor-pointer">
+    <img src="images/logo1.png" alt="RaceWeave logo" class="w-11 h-11 mr-1" />
+    <span class="text-2xl font-extrabold text-gray-900">
+      Race<span class="text-[#9d2323]">Weave</span>
+    </span>
+  </a>
+</div>
+      <!-- MENU -->
+      <div class="hidden md:flex space-x-8">
+        <a href="#home" class="text-gray-700 hover:text-red-600 transition-colors">Strona główna</a>
+        <a href="#products" class="text-gray-700 hover:text-red-600 transition-colors">Produkty</a>
+        <a href="#about" class="text-gray-700 hover:text-red-600 transition-colors">O nas</a>
+        <a href="#contact" class="text-gray-700 hover:text-red-600 transition-colors">Kontakt</a>
+      </div>
+      <!-- burger -->
+      <button id="burger-btn" class="md:hidden" aria-label="Otwórz menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobilne menu -->
+  <div id="mobile-menu" class="fixed inset-0 bg-white/95 z-50 flex flex-col items-center justify-center space-y-10 transition-all duration-300 transform translate-y-[-100%] md:hidden">
+    <a href="#home" class="text-2xl font-bold text-gray-800 hover:text-red-600 transition-colors" onclick="toggleMenu()">Strona główna</a>
+    <a href="#products" class="text-2xl font-bold text-gray-800 hover:text-red-600 transition-colors" onclick="toggleMenu()">Produkty</a>
+    <a href="#about" class="text-2xl font-bold text-gray-800 hover:text-red-600 transition-colors" onclick="toggleMenu()">O nas</a>
+    <a href="#contact" class="text-2xl font-bold text-gray-800 hover:text-red-600 transition-colors" onclick="toggleMenu()">Kontakt</a>
+    <button class="absolute top-6 right-8 text-4xl text-gray-400 hover:text-red-700" aria-label="Zamknij menu" onclick="toggleMenu()">&times;</button>
+  </div>
+</nav>
+
+    <!-- Hero Section -->
+    <section 
+  class="relative flex items-center justify-center min-h-screen overflow-hidden px-4"
+  style="background: url('images/grafika2.png') center/cover no-repeat;">
+  <!-- Ciemny półprzezroczysty overlay dla kontrastu -->
+  <div class="absolute inset-0 bg-black/50"></div>
+  
+  <div class="relative z-10 flex flex-col items-center w-full animate-fadeIn">
+    <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold text-white drop-shadow-[0_6px_36px_rgba(0,0,0,0.85)] tracking-tight text-center">
+      Race<span class="text-[#b32b2b]">Weave</span>
+    </h1>
+    <p class="mt-6 text-xl md:text-2xl text-white/90 font-medium text-center max-w-2xl drop-shadow">
+      Profesjonalne części z włókna węglowego najwyższej jakości
+    </p>
+    <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="#products" class="bg-gradient-to-r from-red-600 to-red-800 hover:from-red-700 hover:to-red-900 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg text-lg">
+        Zobacz Produkty
+      </a>
+      <a href="#contact" class="border-2 border-red-600 hover:border-red-800 text-white hover:text-red-100 px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover:bg-red-50/10 text-lg">
+        Skontaktuj się
+      </a>
+    </div>
+  </div>
+</section>
+
+    
+    <!-- Products Section -->
+    <section id="products" class="relative py-12 bg-gradient-to-br from-white via-gray-100 to-red-50 overflow-hidden">
+  <!-- Noise texture -->
+  <div class="absolute inset-0 opacity-10 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/rocky-wall.png')]"></div>
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12 md:mb-16">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-red-800 to-red-600 bg-clip-text text-transparent">
+              Nasze Produkty
+          </h2>
+          <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+              Każda część wykonana z najwyższej jakości włókna węglowego, 
+              zaprojektowana z myślą o maksymalnej wydajności i trwałości
+          </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          <!-- Dyfuzory -->
+          <div class="bg-white border-2 border-gray-200 rounded-2xl overflow-hidden hover:border-red-300 hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+              <div class="w-full h-48 md:h-56 overflow-hidden">
+                  <img src="images/dyfuzor.png" alt="Dyfuzor" class="w-full h-full object-cover">
+              </div>
+              <div class="p-6 md:p-8">
+                  <div class="w-16 h-16 bg-gradient-to-r from-red-500 to-orange-500 rounded-xl flex items-center justify-center mb-6">
+                      <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                      </svg>
+                  </div>
+                  <h3 class="text-xl md:text-2xl font-bold mb-4 text-red-600">Dyfuzory</h3>
+                  <p class="text-gray-600 mb-6 leading-relaxed text-sm md:text-base">
+                      Aerodynamiczne dyfuzory tylne poprawiające stabilność i docisk przy wysokich prędkościach. 
+                      Wykonane precyzyjnie z włókna węglowego prepreg.
+                  </p>
+                  <ul class="space-y-2">
+                      <li class="flex items-center text-sm text-gray-700">
+                          <svg class="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                          </svg>
+                          Redukcja masy o 60%
+                      </li>
+                      <li class="flex items-center text-sm text-gray-700">
+                          <svg class="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                          </svg>
+                          Zwiększenie docisku
+                      </li>
+                      <li class="flex items-center text-sm text-gray-700">
+                          <svg class="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                          </svg>
+                          Doskonała aerodynamika
+                      </li>
+                  </ul>
+              </div>
+          </div>
+
+          <!-- Spoilery -->
+          <div class="bg-white border-2 border-gray-200 rounded-2xl overflow-hidden hover:border-red-400 hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+              <div class="w-full h-48 md:h-56 overflow-hidden">
+                  <img src="images/spoiler.png" alt="Spoiler" class="w-full h-full object-cover object-[center_-10px]" />
+              </div>
+              <div class="p-6 md:p-8">
+                  <div class="w-16 h-16 bg-gradient-to-r from-red-600 to-red-800 rounded-xl flex items-center justify-center mb-6">
+                      <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                      </svg>
+                  </div>
+                  <h3 class="text-xl md:text-2xl font-bold mb-4 text-red-600">Spoilery</h3>
+                  <p class="text-gray-600 mb-6 leading-relaxed text-sm md:text-base">
+                      Spoilery przednie i tylne zaprojektowane do maksymalizacji docisku i minimalizacji oporu powietrza. 
+                      Idealne dla zastosowań wyścigowych.
+                  </p>
+                  <ul class="space-y-2">
+                      <li class="flex items-center text-sm text-gray-700">
+                          <svg class="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                          </svg>
+                          Optymalna aerodynamika
+                      </li>
+                      <li class="flex items-center text-sm text-gray-700">
+                          <svg class="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                          </svg>
+                          Wytrzymałość na wysokie obciążenia
+                      </li>
+                      <li class="flex items-center text-sm text-gray-700">
+                          <svg class="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                          </svg>
+                          Agresywny wygląd
+                      </li>
+                  </ul>
+              </div>
+          </div>
+
+          <!-- Splitery -->
+          <div class="bg-white border-2 border-gray-200 rounded-2xl overflow-hidden hover:border-red-400 hover:shadow-xl transition-all duration-300 transform hover:scale-105 md:col-span-2 lg:col-span-1">
+              <div class="w-full h-48 md:h-56 overflow-hidden">
+                  <img src="images/spliter.png" alt="Spliter" class="w-full h-full object-cover">
+              </div>
+              <div class="p-6 md:p-8">
+                  <div class="w-16 h-16 bg-gradient-to-r from-red-600 to-red-800 rounded-xl flex items-center justify-center mb-6">
+                      <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                      </svg>
+                  </div>
+                  <h3 class="text-xl md:text-2xl font-bold mb-4 text-red-600">Splitery</h3>
+                  <p class="text-gray-600 mb-6 leading-relaxed text-sm md:text-base">
+                      Splitery przednie poprawiające przepływ powietrza pod pojazdem i zwiększające docisk przedniej osi. 
+                      Kluczowe dla stabilności w zakrętach.
+                  </p>
+                  <ul class="space-y-2">
+                      <li class="flex items-center text-sm text-gray-700">
+                          <svg class="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                          </svg>
+                          Lepsza kontrola pojazdu
+                      </li>
+                      <li class="flex items-center text-sm text-gray-700">
+                          <svg class="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                          </svg>
+                          Precyzyjne wykonanie
+                      </li>
+                      <li class="flex items-center text-sm text-gray-700">
+                          <svg class="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                          </svg>
+                          Sportowy design
+                      </li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+
+    
+
+    <!-- About Section -->
+   <section id="about" class="py-12 md:py-20 bg-white"> 
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="grid lg:grid-cols-2 gap-10 md:gap-16 items-start">
+      
+      <!-- Kolaż przesunięty -->
+      <div class="relative flex flex-col items-start justify-start -mt-38 lg:-ml-18">
+        <!-- Sam obrazek ma zaokrąglenie -->
+        <img src="images/kolaż.png" class="rounded-3xl w-[400px] h-[540px] object-cover" alt="Kolaż" 
+    
+    alt="Kolaż produktów RaceWeave"
+    class="object-cover w-[340px] h-[480px] rounded-3xl"
+    style="object-position: top center;"
+  />
+      </div>
+	  
+      
+      <!-- Opinie klientów -->
+      <div class="flex flex-col justify-center">
+        <h3 class="text-2xl font-bold text-red-700 mb-6">Opinie naszych klientów</h3>
+        <div class="space-y-6">
+          <!-- OPINIA 1 -->
+          <div class="bg-red-50 border-l-4 border-red-400 rounded-xl p-5 shadow-sm">
+            <div class="flex items-center mb-2">
+              <!-- 4/5 -->
+              <span class="flex text-red-500 mr-2">
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><polygon points="10 1.5 12.472 7.253 18.705 7.635 13.902 11.547 15.472 17.735 10 14.273 4.528 17.735 6.098 11.547 1.295 7.635 7.528 7.253"></polygon></svg>
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><polygon points="10 1.5 12.472 7.253 18.705 7.635 13.902 11.547 15.472 17.735 10 14.273 4.528 17.735 6.098 11.547 1.295 7.635 7.528 7.253"></polygon></svg>
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><polygon points="10 1.5 12.472 7.253 18.705 7.635 13.902 11.547 15.472 17.735 10 14.273 4.528 17.735 6.098 11.547 1.295 7.635 7.528 7.253"></polygon></svg>
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><polygon points="10 1.5 12.472 7.253 18.705 7.635 13.902 11.547 15.472 17.735 10 14.273 4.528 17.735 6.098 11.547 1.295 7.635 7.528 7.253"></polygon></svg>
+                <svg class="w-5 h-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20"><polygon points="10 1.5 12.472 7.253 18.705 7.635 13.902 11.547 15.472 17.735 10 14.273 4.528 17.735 6.098 11.547 1.295 7.635 7.528 7.253"></polygon></svg>
+              </span>
+              <span class="text-xs text-gray-500">(4/5)</span>
+            </div>
+            <p class="text-gray-700 italic">"Świetna jakość produktów i szybka realizacja zamówienia. Polecam każdemu, kto szuka profesjonalnych części z włókna węglowego!"</p>
+            <div class="mt-2 text-xs text-gray-500">— Michał, Warszawa</div>
+          </div>
+          <!-- OPINIA 2 -->
+          <div class="bg-red-50 border-l-4 border-red-400 rounded-xl p-5 shadow-sm">
+            <div class="flex items-center mb-2">
+              <!-- 5/5 -->
+              <span class="flex text-red-500 mr-2">
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><polygon points="10 1.5 12.472 7.253 18.705 7.635 13.902 11.547 15.472 17.735 10 14.273 4.528 17.735 6.098 11.547 1.295 7.635 7.528 7.253"></polygon></svg>
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><polygon points="10 1.5 12.472 7.253 18.705 7.635 13.902 11.547 15.472 17.735 10 14.273 4.528 17.735 6.098 11.547 1.295 7.635 7.528 7.253"></polygon></svg>
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><polygon points="10 1.5 12.472 7.253 18.705 7.635 13.902 11.547 15.472 17.735 10 14.273 4.528 17.735 6.098 11.547 1.295 7.635 7.528 7.253"></polygon></svg>
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><polygon points="10 1.5 12.472 7.253 18.705 7.635 13.902 11.547 15.472 17.735 10 14.273 4.528 17.735 6.098 11.547 1.295 7.635 7.528 7.253"></polygon></svg>
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><polygon points="10 1.5 12.472 7.253 18.705 7.635 13.902 11.547 15.472 17.735 10 14.273 4.528 17.735 6.098 11.547 1.295 7.635 7.528 7.253"></polygon></svg>
+              </span>
+              <span class="text-xs text-gray-500">(5/5)</span>
+            </div>
+            <p class="text-gray-700 italic">"RaceWeave to eksperci, którzy doradzą i zrobią dokładnie to, czego potrzebujesz. Pełny profesjonalizm."</p>
+            <div class="mt-2 text-xs text-gray-500">— Tomasz, Kraków</div>
+          </div>
+          <!-- OPINIA 3 -->
+          <div class="bg-red-50 border-l-4 border-red-400 rounded-xl p-5 shadow-sm">
+            <div class="flex items-center mb-2">
+              <!-- 5/5 -->
+              <span class="flex text-red-500 mr-2">
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><polygon points="10 1.5 12.472 7.253 18.705 7.635 13.902 11.547 15.472 17.735 10 14.273 4.528 17.735 6.098 11.547 1.295 7.635 7.528 7.253"></polygon></svg>
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><polygon points="10 1.5 12.472 7.253 18.705 7.635 13.902 11.547 15.472 17.735 10 14.273 4.528 17.735 6.098 11.547 1.295 7.635 7.528 7.253"></polygon></svg>
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><polygon points="10 1.5 12.472 7.253 18.705 7.635 13.902 11.547 15.472 17.735 10 14.273 4.528 17.735 6.098 11.547 1.295 7.635 7.528 7.253"></polygon></svg>
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><polygon points="10 1.5 12.472 7.253 18.705 7.635 13.902 11.547 15.472 17.735 10 14.273 4.528 17.735 6.098 11.547 1.295 7.635 7.528 7.253"></polygon></svg>
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><polygon points="10 1.5 12.472 7.253 18.705 7.635 13.902 11.547 15.472 17.735 10 14.273 4.528 17.735 6.098 11.547 1.295 7.635 7.528 7.253"></polygon></svg>
+              </span>
+              <span class="text-xs text-gray-500">(5/5)</span>
+            </div>
+            <p class="text-gray-700 italic">"Wygląd, precyzja, wytrzymałość. Sam montowałem i jestem w szoku jak to pasuje."</p>
+            <div class="mt-2 text-xs text-gray-500">— Aneta, Poznań</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Features Section -->
+    <section class="py-12 md:py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-12 md:mb-16">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-red-600 to-red-800 bg-clip-text text-transparent">
+                    Dlaczego Włókno Węglowe?
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                <div class="text-center p-4 md:p-6 bg-white rounded-xl shadow-lg border border-red-100">
+                    <div class="w-16 md:w-20 h-16 md:h-20 bg-gradient-to-r from-red-600 to-red-800 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-xl md:text-2xl font-bold text-white">-60%</span>
+                    </div>
+                    <h3 class="text-lg md:text-xl font-bold mb-2 text-red-600">Lekkość</h3>
+                    <p class="text-gray-600 text-sm md:text-base">Redukcja masy o 60% w porównaniu do tradycyjnych materiałów</p>
+                </div>
+
+                <div class="text-center p-4 md:p-6 bg-white rounded-xl shadow-lg border border-red-100">
+                    <div class="w-16 md:w-20 h-16 md:h-20 bg-gradient-to-r from-red-600 to-red-800 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-xl md:text-2xl font-bold text-white">5x</span>
+                    </div>
+                    <h3 class="text-lg md:text-xl font-bold mb-2 text-red-600">Wytrzymałość</h3>
+                    <p class="text-gray-600 text-sm md:text-base">Pięciokrotnie wyższa wytrzymałość na rozciąganie niż stal</p>
+                </div>
+
+                <div class="text-center p-4 md:p-6 bg-white rounded-xl shadow-lg border border-red-100">
+                    <div class="w-16 md:w-20 h-16 md:h-20 bg-gradient-to-r from-red-600 to-red-800 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-xl md:text-2xl font-bold text-white">0%</span>
+                    </div>
+                    <h3 class="text-lg md:text-xl font-bold mb-2 text-red-600">Korozja</h3>
+                    <p class="text-gray-600 text-sm md:text-base">Całkowita odporność na korozję i warunki atmosferyczne</p>
+                </div>
+
+                <div class="text-center p-4 md:p-6 bg-white rounded-xl shadow-lg border border-red-100">
+                    <div class="w-16 md:w-20 h-16 md:h-20 bg-gradient-to-r from-red-600 to-red-800 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-xl md:text-2xl font-bold text-white">100%</span>
+                    </div>
+                    <h3 class="text-lg md:text-xl font-bold mb-2 text-red-600">Precyzja</h3>
+                    <p class="text-gray-600 text-sm md:text-base">Najwyższa precyzja wykonania i dopasowania</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-12 md:py-20 bg-white relative ">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-12 md:mb-16">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-red-800 to-red-600 bg-clip-text text-transparent">
+                    Skontaktuj się z Nami
+                </h2>
+                <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+                    Masz pytania o nasze produkty? Potrzebujesz indywidualnej wyceny? 
+                    Jesteśmy tutaj, aby Ci pomóc.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                <div class="bg-white border-2 border-red-200 rounded-2xl p-6 md:p-8 text-center hover:border-red-400 hover:shadow-xl transition-all duration-300">
+                    <div class="w-12 md:w-16 h-12 md:h-16 bg-gradient-to-r from-red-600 to-red-800 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-6 md:w-8 h-6 md:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg md:text-xl font-bold mb-4 text-red-600">Telefon</h3>
+                    <p class="text-gray-700 mb-2 text-sm md:text-base">+48 123 456 789</p>
+                    <p class="text-xs md:text-sm text-gray-500">Pon-Pt: 8:00-18:00</p>
+                </div>
+
+                <div class="bg-white border-2 border-red-200 rounded-2xl p-6 md:p-8 text-center hover:border-red-400 hover:shadow-xl transition-all duration-300">
+                    <div class="w-12 md:w-16 h-12 md:h-16 bg-gradient-to-r from-red-600 to-red-800 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-6 md:w-8 h-6 md:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg md:text-xl font-bold mb-4 text-red-600">Email</h3>
+                    <p class="text-gray-700 mb-2 text-sm md:text-base">info@RaceWeave.pl</p>
+                    <p class="text-xs md:text-sm text-gray-500">Odpowiedź w 24h</p>
+                </div>
+
+                <div class="bg-white border-2 border-red-200 rounded-2xl p-6 md:p-8 text-center hover:border-red-400 hover:shadow-xl transition-all duration-300">
+                    <div class="w-12 md:w-16 h-12 md:h-16 bg-gradient-to-r from-red-600 to-red-800 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-6 md:w-8 h-6 md:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg md:text-xl font-bold mb-4 text-red-600">Adres</h3>
+                    <p class="text-gray-700 mb-2 text-sm md:text-base">ul. Kompozytowa 123</p>
+                    <p class="text-xs md:text-sm text-gray-500">00-001 Warszawa</p>
+                </div>
+            </div>
+
+            <div class="mt-12 md:mt-16 text-center">
+                <div class="bg-red-50 border-2 border-red-200 rounded-2xl p-6 md:p-8 max-w-2xl mx-auto">
+                    <h3 class="text-xl md:text-2xl font-bold mb-4 text-red-600">Indywidualne Projekty</h3>
+                    <p class="text-gray-600 mb-6 text-sm md:text-base">
+                        Oferujemy również projekty indywidualne dopasowane do Twoich potrzeb. 
+                        Skontaktuj się z nami, aby omówić szczegóły.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+  <button class="bg-gradient-to-r from-red-600 to-red-800 hover:from-red-700 hover:to-red-900 text-white px-6 md:px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg text-sm md:text-base">
+    Zapytaj o Wycenę
+  </button>
+  <a href="katalog.pdf" download
+    class="border-2 border-red-600 hover:border-red-800 text-red-600 hover:text-red-800 px-6 md:px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover:bg-red-50 text-sm md:text-base flex items-center justify-center">
+    Pobierz Katalog
+  </a>
+</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-100 border-t border-gray-200 py-8 md:py-12 relative">
+        <div class="absolute inset-0 fiber-texture"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center space-x-4 mb-4">
+                        <div class="w-10 h-10 bg-gradient-to-r from-red-600 to-red-800 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                            </svg>
+                        </div>
+                        <span class="text-xl font-bold text-gray-900">RaceWeave</span>
+                    </div>
+                    <p class="text-gray-600 mb-4 max-w-md text-sm md:text-base">
+                        Specjaliści w dziedzinie części z włókna węglowego. 
+                        Jakość, precyzja i zaawansowane technologie to nasze priorytety.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-bold mb-4 text-red-600">Produkty</h4>
+                    <ul class="space-y-2 text-gray-600 text-sm md:text-base">
+                        <li>Dyfuzory</li>
+                        <li>Spoilery</li>
+                        <li>Splitery</li>
+                        <li>Projekty indywidualne</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-bold mb-4 text-red-600">Kontakt</h4>
+                    <ul class="space-y-2 text-gray-600 text-sm md:text-base">
+                        <li>+48 123 456 789</li>
+                        <li>info@RaceWeave.pl</li>
+                        <li>ul. Kompozytowa 123</li>
+                        <li>00-001 Warszawa</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-200 mt-8 md:mt-12 pt-6 md:pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center text-gray-500 text-sm md:text-base">
+                    <p>&copy; 2024 CarbonFiber Pro. Wszystkie prawa zastrzeżone.</p>
+                    <div class="flex space-x-4 mt-4 md:mt-0 justify-center text-sm text-gray-500">
+  <a href="privacy.html" class="hover:text-red-600 transition-colors">Polityka Prywatności</a>
+  <span>|</span>
+  <a href="terms.html" class="hover:text-red-600 transition-colors">Regulamin</a>
+</div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    // Newsletter popup
+    setTimeout(() => {
+        document.getElementById('newsletter-popup').classList.remove('hidden');
+    }, 8000);
+
+    function closeNewsletter() {
+        document.getElementById('newsletter-popup').classList.add('hidden');
+    }
+
+    // Cookie consent
+    function acceptCookies() {
+        document.getElementById('cookie-consent').style.display = 'none';
+    }
+
+    function closeCookies() {
+        document.getElementById('cookie-consent').style.display = 'none';
+    }
+
+    // Smooth scroll
+    document.addEventListener('DOMContentLoaded', function() {
+        const links = document.querySelectorAll('a[href^="#"]');
+        
+        links.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Burger menu obsługa
+        const burgerBtn = document.getElementById('burger-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if(burgerBtn && mobileMenu) {
+            function toggleMenu() {
+                mobileMenu.classList.toggle('translate-y-[-100%]');
+                mobileMenu.classList.toggle('translate-y-0');
+                document.body.classList.toggle('overflow-hidden');
+            }
+            burgerBtn.addEventListener('click', toggleMenu);
+            // Linki i przycisk zamykania w menu mają onclick="toggleMenu()" w HTML
+        }
+    });
+	
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#dc2626',
+                        'primary-dark': '#b91c1c',
+                        'primary-light': '#ef4444'
+                    }
+                }
+            }
+        }
+    
+	function subscribeNewsletter() {
+  const email = document.getElementById('newsletter-email').value;
+  if (!email) {
+    alert("Podaj poprawny adres e-mail!");
+    return;
+  }
+  fetch('http://localhost:3001/api/newsletter', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email })
+  })
+    .then(res => res.json())
+    .then(data => alert(data.message))
+    .catch(() => alert('Wersja Demo!'));
+}
+function acceptCookies() {
+  // Możesz np. zapisać info do localStorage:
+  localStorage.setItem('cookieAccepted', 'yes');
+  document.getElementById('cookie-banner').style.display = 'none';
+}
+function hideBanner() {
+  // Po prostu chowasz baner (i NIE ustawiasz dodatkowych cookies)
+  document.getElementById('cookie-banner').style.display = 'none';
+}
+window.onload = function() {
+  if(localStorage.getItem('cookieAccepted') === 'yes') {
+    document.getElementById('cookie-banner').style.display = 'none';
+  }
+}
+</script>
+</body>
+</html>
