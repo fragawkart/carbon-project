@@ -14,7 +14,7 @@ body{font-family:'Inter','Segoe UI','Arial','Helvetica',sans-serif;font-feature-
 h1,h2,h3,.no-cut{line-height:1.15!important;padding-bottom:6px!important;margin-bottom:0.1em!important;overflow:visible!important}
 @keyframes fadeIn{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
 .animate-fadeIn{animation:fadeIn 1s cubic-bezier(.4,0,.2,1) both}
-@media (prefers-reduced-motion:reduce){.animate-fadeIn{animation:none}#mobile-menu{transition:none}}
+@media (prefers-reduced-motion:reduce){.animate-fadeIn{animation:none}}
 </style>
 </head>
 <body class="min-h-screen bg-gray-50 text-gray-900">
@@ -55,21 +55,21 @@ h1,h2,h3,.no-cut{line-height:1.15!important;padding-bottom:6px!important;margin-
         <a href="#about" class="text-gray-700 hover:text-red-600 transition-colors">O nas</a>
         <a href="#contact" class="text-gray-700 hover:text-red-600 transition-colors">Kontakt</a>
       </div>
-      <button id="burger-btn" class="md:hidden" aria-label="Otwórz menu" aria-expanded="false" aria-controls="mobile-menu">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+      <button id="burger-btn" class="md:hidden text-gray-900" aria-label="Otwórz menu" aria-expanded="false" aria-controls="mobile-menu">
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
       </button>
     </div>
   </div>
-
-  <!-- Mobilne menu -->
-  <div id="mobile-menu" class="fixed inset-0 bg-white/95 backdrop-blur-md z-50 flex flex-col items-center justify-center space-y-10 transition-transform duration-300 ease-in-out -translate-y-full md:hidden" role="dialog" aria-modal="true" aria-label="Menu nawigacyjne">
-    <a href="#home" class="text-2xl font-bold text-gray-800 hover:text-red-600 transition-colors mobile-link">Strona główna</a>
-    <a href="#products" class="text-2xl font-bold text-gray-800 hover:text-red-600 transition-colors mobile-link">Produkty</a>
-    <a href="#about" class="text-2xl font-bold text-gray-800 hover:text-red-600 transition-colors mobile-link">O nas</a>
-    <a href="#contact" class="text-2xl font-bold text-gray-800 hover:text-red-600 transition-colors mobile-link">Kontakt</a>
-    <button id="close-menu-btn" class="absolute top-6 right-8 text-4xl text-gray-400 hover:text-red-700" aria-label="Zamknij menu">&times;</button>
-  </div>
 </nav>
+
+<!-- Mobilne menu (pełne, nieprzezroczyste, domyślnie ukryte) -->
+<div id="mobile-menu" class="hidden fixed inset-0 bg-white z-[60] flex-col items-center justify-center space-y-10 md:hidden" role="dialog" aria-modal="true" aria-label="Menu nawigacyjne">
+  <a href="#home" class="text-2xl font-bold text-gray-800 hover:text-red-600 transition-colors mobile-link">Strona główna</a>
+  <a href="#products" class="text-2xl font-bold text-gray-800 hover:text-red-600 transition-colors mobile-link">Produkty</a>
+  <a href="#about" class="text-2xl font-bold text-gray-800 hover:text-red-600 transition-colors mobile-link">O nas</a>
+  <a href="#contact" class="text-2xl font-bold text-gray-800 hover:text-red-600 transition-colors mobile-link">Kontakt</a>
+  <button id="close-menu-btn" class="absolute top-6 right-8 text-4xl text-gray-400 hover:text-red-700" aria-label="Zamknij menu">&times;</button>
+</div>
 
 <!-- Hero Section -->
 <section id="home" class="relative flex items-center justify-center min-h-screen overflow-hidden px-4" style="background: url(images/grafika2.png) center/cover no-repeat;">
@@ -93,7 +93,6 @@ h1,h2,h3,.no-cut{line-height:1.15!important;padding-bottom:6px!important;margin-
       <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">Każda część wykonana z najwyższej jakości włókna węglowego, zaprojektowana z myślą o maksymalnej wydajności i trwałości</p>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-      <!-- Dyfuzory -->
       <div class="bg-white border-2 border-gray-200 rounded-2xl overflow-hidden hover:border-red-300 hover:shadow-xl transition-all duration-300 transform hover:scale-105">
         <div class="w-full h-48 md:h-56 overflow-hidden"><img src="images/dyfuzor.png" alt="Dyfuzor" class="w-full h-full object-cover" loading="lazy"></div>
         <div class="p-6 md:p-8">
@@ -107,7 +106,6 @@ h1,h2,h3,.no-cut{line-height:1.15!important;padding-bottom:6px!important;margin-
           </ul>
         </div>
       </div>
-      <!-- Spoilery -->
       <div class="bg-white border-2 border-gray-200 rounded-2xl overflow-hidden hover:border-red-400 hover:shadow-xl transition-all duration-300 transform hover:scale-105">
         <div class="w-full h-48 md:h-56 overflow-hidden"><img src="images/spoiler.png" alt="Spoiler" class="w-full h-full object-cover object-[center_-10px]" loading="lazy" /></div>
         <div class="p-6 md:p-8">
@@ -121,7 +119,6 @@ h1,h2,h3,.no-cut{line-height:1.15!important;padding-bottom:6px!important;margin-
           </ul>
         </div>
       </div>
-      <!-- Splitery -->
       <div class="bg-white border-2 border-gray-200 rounded-2xl overflow-hidden hover:border-red-400 hover:shadow-xl transition-all duration-300 transform hover:scale-105 md:col-span-2 lg:col-span-1">
         <div class="w-full h-48 md:h-56 overflow-hidden"><img src="images/spliter.png" alt="Spliter" class="w-full h-full object-cover" loading="lazy"></div>
         <div class="p-6 md:p-8">
@@ -143,7 +140,7 @@ h1,h2,h3,.no-cut{line-height:1.15!important;padding-bottom:6px!important;margin-
 <section id="about" class="py-12 md:py-20 bg-white">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
     <div class="grid lg:grid-cols-2 gap-10 md:gap-16 items-start">
-      <div class="relative flex flex-col items-start justify-start -mt-10 lg:-ml-12">
+      <div class="relative flex flex-col items-center lg:items-start justify-start lg:-ml-12">
         <img src="images/kolaż.png" alt="Kolaż produktów RaceWeave" class="rounded-3xl w-[400px] h-[540px] object-cover max-w-full" style="object-position: top center;" loading="lazy" />
       </div>
       <div class="flex flex-col justify-center">
@@ -276,21 +273,21 @@ document.addEventListener('DOMContentLoaded', function () {
   const links = menu ? menu.querySelectorAll('.mobile-link') : [];
 
   function openMenu() {
-    menu.classList.remove('-translate-y-full');
-    menu.classList.add('translate-y-0');
+    menu.classList.remove('hidden');
+    menu.classList.add('flex');
     document.body.classList.add('overflow-hidden');
     burger.setAttribute('aria-expanded', 'true');
   }
   function closeMenu() {
-    menu.classList.add('-translate-y-full');
-    menu.classList.remove('translate-y-0');
+    menu.classList.add('hidden');
+    menu.classList.remove('flex');
     document.body.classList.remove('overflow-hidden');
     burger.setAttribute('aria-expanded', 'false');
   }
 
   if (burger && menu) {
     burger.addEventListener('click', () =>
-      menu.classList.contains('-translate-y-full') ? openMenu() : closeMenu());
+      menu.classList.contains('hidden') ? openMenu() : closeMenu());
     if (closeBtn) closeBtn.addEventListener('click', closeMenu);
     links.forEach(a => a.addEventListener('click', closeMenu));
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
